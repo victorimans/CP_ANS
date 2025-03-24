@@ -1,2 +1,6 @@
 # CP_ANS
-My collection of competitive programming solutions and notes.
+A personal collection of competitive programming solutions and notes.
+
+This repository contains answer files and explanations for various problems from platforms such as Codeforces, AtCoder, Ojuz, Vjudge, SPOJ, and TLX.
+
+Credit : Victoriano Iman Santosa
