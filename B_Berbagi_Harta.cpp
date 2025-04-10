@@ -1,0 +1,100 @@
+#include <bits/stdc++.h>
+using namespace std;
+#define all(x) (x).begin(), (x).end()
+typedef long long ll;
+typedef unsigned long long int ull;
+const ll md = 1e9+7;
+const int ukr = 2e5+10;
+int read() {
+    int ketek = 0; bool ne=0;
+    register char c = getchar();
+    while(c == ' ' or c =='\n') c =getchar();
+    if(c=='-'){ne = 1; c = getchar();}
+    while(c >= '0' and c <='9') { ketek = (ketek<<3)+(ketek<<1)+c-'0'; c = getchar();}
+    if(ne) ketek*=-1;
+    return ketek;
+}   
+void print(int x) {
+    if (x < 0) {putchar('-');x = -x;}
+    int len = 0, buf[10];
+    if (x == 0) {putchar('0');return;}
+    while (x > 0) {buf[len++] = x % 10; x/=10;}
+    while (len > 0) {putchar('0' + buf[--len]);}
+}
+void File_Work(){
+	freopen("test.in","r",stdin);
+	freopen("test.out","w",stdout);
+}
+int n, m, a, b, c, d, id;
+struct babi{
+    ll x, y, id;
+};
+struct babis{
+    ll x, y;
+};
+ll gcd(ll a, ll b) {
+   if (b == 0) return a;
+   return gcd(b, a % b);
+}
+ll pgkt(ll rnx, ll rny){
+    if(rny == 0) return 1;
+    ll nwrn = pgkt(rnx, rny/2);
+    if(rny%2){
+        return (((nwrn*nwrn)%md)*rnx)%md;
+    }else{
+        return (nwrn*nwrn)%md;
+    }
+}
+vector<pair<ll,ll>> v;
+string s;
+ll ar[ukr];
+map<ll,ll> mp;
+void solve(){
+    cin >> n >> a >> b;
+    for(int i = 1; i <= n; i++){
+        cin >> ar[i];
+    }
+    for(int i = 0; i < a; i++){
+        cin >> id;
+        mp[id] = 1;
+    }
+    for(int i = 0; i < b; i++){
+        cin >> id;
+        if(mp[id]){
+            v.push_back({ar[id], id});
+        }
+    }
+    /* 
+    1 2 3 4 5 6 7
+    1 3 6 0 4 2 10
+     */
+    sort(all(v));
+    ll ans = 0, tk = 0;
+    while(!v.empty()){
+        mp[v.back().second] = 0;
+        if(tk%2 == 0){
+            ans += v.back().first;
+        }
+        tk++;
+        v.pop_back();
+    }
+    //cout << ans << "\n";
+    for(auto i : mp){
+        //cout << i.first << " " << i.second << "\n";
+        if(i.second){
+            ans += ar[i.first];
+        }
+    }
+    cout << ans;
+}
+int main() {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); cout.tie(0);
+	int t =1;
+    //cin >> t;
+    for(int i = 1; i <= t; i++){
+        //cout << "Case " << i << ": ";
+        solve();
+    }
+}
+
